@@ -131,11 +131,7 @@ object CheckoutSolution {
                     totalValue += applySingleDeal(2, 45, pricePerItem, item.value)
                 }
                 "F" -> {
-                    totalValue += if (item.value >= 3) {
-                        (item.value - (item.value / 3)) * pricePerItem
-                    } else {
-                        item.value * pricePerItem
-                    }
+                    totalValue += buyXGetSameFree(2, item.value, pricePerItem)
                 }
                 else -> {
                     totalValue += item.value * pricePerItem
@@ -147,6 +143,7 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
 
 
 
