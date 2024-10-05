@@ -34,7 +34,35 @@ object CheckoutSolution {
 //        | Z    | 50    |                        |
 //        +------+-------+------------------------+
 
-        val prices = mapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15 , "E" to 40, "F" to 10)
+        val prices = mapOf(
+            "A" to 50,
+            "B" to 30,
+            "C" to 20,
+            "D" to 15,
+            "E" to 40,
+            "F" to 10,
+            "G" to 20,
+            "H" to 10,
+            "I" to 35,
+            "J" to 60,
+            "K" to 80,
+            "L" to 90,
+            "M" to 15,
+            "N" to 40,
+            "O" to 10,
+            "P" to 50,
+            "Q" to 30,
+            "R" to 50,
+            "S" to 30,
+            "T" to 20,
+            "U" to 40,
+            "V" to 50,
+            "W" to 20,
+            "X" to 90,
+            "Y" to 10,
+            "Z" to 50,
+            )
+
         // check for illegal values
         for (item in skus) {
             if (!prices.contains(item.toString())) return -1
@@ -43,19 +71,30 @@ object CheckoutSolution {
         val itemMap : MutableMap<String, Int> = mutableMapOf()
         var totalValue = 0
 
+        //helper
+        fun buyXGetOneFree(item1: String, item2: String, value: Int) {
+            val itemDiscount = itemMap.getOrDefault(item1, 0).div(value)
+            itemMap[item2] = if (itemMap.getOrDefault(item2, 0) - itemDiscount < 0) {
+                0
+            } else {
+                itemMap.getOrDefault(item2, 0) - itemDiscount
+            }
+        }
+
         // map occurrence of each items
         skus.forEach { item ->
             itemMap[item.toString()] = itemMap.getOrDefault(item.toString(), 0) + 1
         }
 
         // do this first since this can affect other deals
-        // apply E deal - maybe move this to when block somehow
-        val Ediscount = itemMap.getOrDefault("E", 0).div(2)
-        itemMap["B"] = if (itemMap.getOrDefault("B", 0) - Ediscount < 0) {
-            0
-        } else {
-            itemMap.getOrDefault("B", 0) - Ediscount
-        }
+        // apply E to B deal (2) - TODO: maybe move this to when block somehow
+        buyXGetOneFree("E", "B", 2)
+
+        // N to M deal (3)
+        buyXGetOneFree("N", "M", 3)
+
+        // R to Q deal (3)
+        buyXGetOneFree("R", "Q", 3)
 
         itemMap.forEach{ item ->
             val pricePerItem = prices[item.key]!!
