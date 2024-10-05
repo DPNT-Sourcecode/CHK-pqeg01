@@ -117,8 +117,10 @@ object CheckoutSolution {
 
                     for (item in sortedItems) {
                         if (itemMap.getOrDefault(item.toString(), 0) > 0 && counter < 3) {
-                            itemMap[item.toString()] = itemMap[item.toString()]!! - 1
-                            counter++
+                            repeat(minOf(itemMap[item.toString()]!!, 3 - counter)) {
+                                itemMap[item.toString()] = itemMap[item.toString()]!! - 1
+                                counter++
+                            }
                         }
                     }
 
@@ -189,3 +191,4 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
