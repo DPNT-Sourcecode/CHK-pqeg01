@@ -107,7 +107,7 @@ object CheckoutSolution {
 
         fun applyGroupDeal(items: String, deal: Int): Int {
             var totalItemCount = items.map { itemMap.getOrDefault(it.toString(), 0) }.sum()
-            val sortedItems = items.
+            val sortedItems = items.toList().sortedBy { prices[it.toString()] }
             var total = 0
 
             while (totalItemCount >= 3) {
@@ -189,5 +189,3 @@ object CheckoutSolution {
         return totalValue
     }
 }
-
-
