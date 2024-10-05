@@ -169,5 +169,3 @@ object CheckoutSolution {
         return totalValue
     }
 }
-
-
