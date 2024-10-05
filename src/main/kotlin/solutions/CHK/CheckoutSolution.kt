@@ -136,20 +136,20 @@ object CheckoutSolution {
                 "H" -> {
                     totalValue += applyDoubleDeal(10, 80, 5, 45, pricePerItem, item.value)
                 }
-                "H" -> {
-                    totalValue += 0
+                "K" -> {
+                    totalValue += applySingleDeal(2, 150, pricePerItem, item.value)
                 }
-                "H" -> {
-                    totalValue += 0
+                "P" -> {
+                    totalValue += applySingleDeal(5, 200, pricePerItem, item.value)
                 }
-                "H" -> {
-                    totalValue += 0
+                "Q" -> {
+                    totalValue += applySingleDeal(3, 80, pricePerItem, item.value)
                 }
-                "H" -> {
-                    totalValue += 0
+                "U" -> {
+                    totalValue += buyXGetSameFree(3, pricePerItem, item.value)
                 }
-                "H" -> {
-                    totalValue += 0
+                "V" -> {
+                    totalValue += applyDoubleDeal(3, 130, 2, 90, pricePerItem, item.value)
                 }
                 else -> {
                     totalValue += item.value * pricePerItem
