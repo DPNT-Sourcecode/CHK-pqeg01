@@ -24,13 +24,22 @@ object CheckoutSolution {
         }
 
         itemMap.forEach{ item ->
-            val pricePerItem = prices[item.key]
+            val pricePerItem = prices[item.key]!!
 
             if (item.key == "A") {
                 val fiveCount = item.value / 5
                 val after = item.value - fiveCount * 5
                 val threeCount = after / 3
                 val remainder = after % 3
+
+                totalValue += fiveCount * 200 + threeCount * 130 + remainder * pricePerItem
+            } else if (item.key == "B") {
+                val twoCount = item.value / 2
+                val remainder = item.value - twoCount * 2
+
+                totalValue += totalValue * 45 + remainder * pricePerItem
+            } else {
+                totalValue += item.value * pricePerItem
             }
 
         }
@@ -38,6 +47,3 @@ object CheckoutSolution {
         return totalValue
     }
 }
-
-
-
