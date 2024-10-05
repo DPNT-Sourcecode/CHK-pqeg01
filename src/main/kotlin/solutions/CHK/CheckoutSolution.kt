@@ -33,6 +33,10 @@ object CheckoutSolution {
                     val threeCount = after / 3
                     val remainder = after % 3
 
+                    println(fiveCount)
+                    println(after)
+                    println(threeCount)
+                    println(remainder)
                     totalValue += fiveCount * 200 + threeCount * 130 + remainder * pricePerItem
                 }
                 "B" -> {
