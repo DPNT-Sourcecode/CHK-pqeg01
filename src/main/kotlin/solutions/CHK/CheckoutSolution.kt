@@ -45,7 +45,7 @@ object CheckoutSolution {
                 }
                 "F" -> {
                     totalValue += if (item.value >= 3) {
-                        (item.value - (item.value / 2)) * pricePerItem
+                        (item.value - (item.value / 3)) * pricePerItem
                     } else {
                         item.value * pricePerItem
                     }
@@ -60,4 +60,5 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
 
