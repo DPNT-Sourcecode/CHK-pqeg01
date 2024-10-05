@@ -97,8 +97,12 @@ object CheckoutSolution {
             return count * deal + remainder * itemPrice
         }
 
-        fun buyXGetSameFree(): Int {
-
+        fun buyXGetSameFree(count: Int, itemCount: Int, itemPrice: Int): Int {
+            return if (itemCount >= (count + 1)) {
+                (itemCount / (count + 1)) * count + (itemCount % (count + 1))
+            } else {
+                itemCount * itemPrice
+            }
         }
 
         // map occurrence of each items
@@ -143,4 +147,5 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
 
