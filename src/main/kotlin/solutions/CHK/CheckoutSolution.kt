@@ -16,7 +16,8 @@ object CheckoutSolution {
             itemMap[item.toString()] = itemMap.getOrDefault(item.toString(), 0) + 1
         }
 
+
+
         return totalValue
     }
 }
-
