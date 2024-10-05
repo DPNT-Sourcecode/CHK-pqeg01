@@ -97,7 +97,7 @@ object CheckoutSolution {
             return count * deal + remainder * itemPrice
         }
 
-        fun buyXGetSameFree(count: Int, itemCount: Int, itemPrice: Int): Int {
+        fun buyXGetSameFree(count: Int, itemPrice: Int, itemCount: Int): Int {
             return if (itemCount >= (count + 1)) {
                 (itemCount - (itemCount / (count + 1))) * itemPrice
             } else {
@@ -131,7 +131,25 @@ object CheckoutSolution {
                     totalValue += applySingleDeal(2, 45, pricePerItem, item.value)
                 }
                 "F" -> {
-                    totalValue += buyXGetSameFree(2, item.value, pricePerItem)
+                    totalValue += buyXGetSameFree(2, pricePerItem, item.value)
+                }
+                "H" -> {
+                    totalValue += applyDoubleDeal(10, 80, 5, 45, pricePerItem, item.value)
+                }
+                "H" -> {
+                    totalValue += 0
+                }
+                "H" -> {
+                    totalValue += 0
+                }
+                "H" -> {
+                    totalValue += 0
+                }
+                "H" -> {
+                    totalValue += 0
+                }
+                "H" -> {
+                    totalValue += 0
                 }
                 else -> {
                     totalValue += item.value * pricePerItem
@@ -143,7 +161,3 @@ object CheckoutSolution {
         return totalValue
     }
 }
-
-
-
-
