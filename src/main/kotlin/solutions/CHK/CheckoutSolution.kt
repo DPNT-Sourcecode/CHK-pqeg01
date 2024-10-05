@@ -10,11 +10,38 @@ object CheckoutSolution {
         var Bcount = 0
 
         for (item in skus) {
-            if (items.containsKey(item)) {
+            val itemString = item.toString()
 
+            if (items.contains(itemString)) {
+
+                //basecase
+                totalValue += items[itemString]!!
+
+                if (itemString == "A") {
+                    Acount++
+
+                    if (Acount >= 3) {
+                        Acount = 0
+                        // 3 * 50 - 130 = 20
+                        totalValue -= 20
+                    }
+                }
+
+                if (itemString == "B") {
+                    Bcount++
+
+                    if (Bcount >= 2) {
+                        Bcount = 0
+                        // 2 * 30 - 45 = 15
+                        totalValue -= 15
+                    }
+                }
+
+            } else {
+                return -1
             }
         }
 
-        return -1
+        return totalValue
     }
 }
