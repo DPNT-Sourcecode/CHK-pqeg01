@@ -8,6 +8,6 @@ class SumSolutionTest {
 
     @Test
     fun sum() {
-        println(CheckoutSolution.checkout("A"))
+        println(CheckoutSolution.checkout("ZZZS"))
     }
 }
