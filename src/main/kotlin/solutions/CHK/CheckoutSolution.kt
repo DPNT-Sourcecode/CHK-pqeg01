@@ -5,7 +5,7 @@ object CheckoutSolution {
         val prices = mapOf("A" to 50, "B" to 30, "C" to 20, "D" to 15 , "E" to 40)
         // check for illegal values
         for (item in skus) {
-            if (!skus.contains(item.toString())) return -1
+            if (!prices.contains(item.toString())) return -1
         }
 
         val itemMap : MutableMap<String, Int> = mutableMapOf()
@@ -26,20 +26,24 @@ object CheckoutSolution {
         itemMap.forEach{ item ->
             val pricePerItem = prices[item.key]!!
 
-            if (item.key == "A") {
-                val fiveCount = item.value / 5
-                val after = item.value - fiveCount * 5
-                val threeCount = after / 3
-                val remainder = after % 3
+            when (item.key) {
+                "A" -> {
+                    val fiveCount = item.value / 5
+                    val after = item.value - fiveCount * 5
+                    val threeCount = after / 3
+                    val remainder = after % 3
 
-                totalValue += fiveCount * 200 + threeCount * 130 + remainder * pricePerItem
-            } else if (item.key == "B") {
-                val twoCount = item.value / 2
-                val remainder = item.value - twoCount * 2
+                    totalValue += fiveCount * 200 + threeCount * 130 + remainder * pricePerItem
+                }
+                "B" -> {
+                    val twoCount = item.value / 2
+                    val remainder = item.value - twoCount * 2
 
-                totalValue += totalValue * 45 + remainder * pricePerItem
-            } else {
-                totalValue += item.value * pricePerItem
+                    totalValue += totalValue * 45 + remainder * pricePerItem
+                }
+                else -> {
+                    totalValue += item.value * pricePerItem
+                }
             }
 
         }
