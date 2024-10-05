@@ -44,10 +44,10 @@ object CheckoutSolution {
                     totalValue += twoCount * 45 + remainder * pricePerItem
                 }
                 "F" -> {
-                    if (item.value >= 3) {
-                        totalValue += (item.value / 2) * pricePerItem + (item.value % 2 + 1) * pricePerItem
+                    totalValue += if (item.value >= 3) {
+                        (item.value - (item.value / 2)) * pricePerItem
                     } else {
-                        totalValue += item.value * pricePerItem
+                        item.value * pricePerItem
                     }
                 }
                 else -> {
@@ -60,3 +60,4 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
