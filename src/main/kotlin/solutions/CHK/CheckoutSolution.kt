@@ -13,21 +13,21 @@ object CheckoutSolution {
 //        | E    | 40    | 2E get one B free      |
 //        | F    | 10    | 2F get one F free      |
 //        | G    | 20    |                        |
-//        | H    | 10    | 5H for 45, 10H for 80  | ok
+//        | H    | 10    | 5H for 45, 10H for 80  | double
 //        | I    | 35    |                        |
 //        | J    | 60    |                        |
-//        | K    | 80    | 2K for 150             | ok
+//        | K    | 80    | 2K for 150             | single
 //        | L    | 90    |                        |
 //        | M    | 15    |                        |
-//        | N    | 40    | 3N get one M free      | E
+//        | N    | 40    | 3N get one M free      | get diff free
 //        | O    | 10    |                        |
-//        | P    | 50    | 5P for 200             | ok
-//        | Q    | 30    | 3Q for 80              | ok
-//        | R    | 50    | 3R get one Q free      | E
+//        | P    | 50    | 5P for 200             | single
+//        | Q    | 30    | 3Q for 80              | single
+//        | R    | 50    | 3R get one Q free      | get diff free
 //        | S    | 30    |                        |
 //        | T    | 20    |                        |
-//        | U    | 40    | 3U get one U free      | ok
-//        | V    | 50    | 2V for 90, 3V for 130  | ok
+//        | U    | 40    | 3U get one U free      | get same free
+//        | V    | 50    | 2V for 90, 3V for 130  | double
 //        | W    | 20    |                        |
 //        | X    | 90    |                        |
 //        | Y    | 10    |                        |
@@ -71,7 +71,7 @@ object CheckoutSolution {
         val itemMap : MutableMap<String, Int> = mutableMapOf()
         var totalValue = 0
 
-        //helper
+        //helpers
         fun buyXGetOneFree(item1: String, item2: String, value: Int) {
             val itemDiscount = itemMap.getOrDefault(item1, 0).div(value)
             itemMap[item2] = if (itemMap.getOrDefault(item2, 0) - itemDiscount < 0) {
@@ -79,6 +79,22 @@ object CheckoutSolution {
             } else {
                 itemMap.getOrDefault(item2, 0) - itemDiscount
             }
+        }
+
+        fun applyDoubleDeal(firstMultiplier: Int, firstDeal: Int, secondMultiplier: Int, secondDeal: Int, itemPrice: Int, itemCount: Int): Int {
+            val fCount = itemCount / firstMultiplier
+            val after = itemCount - fCount * firstMultiplier
+            val sCount = after / secondMultiplier
+            val remainder = after % secondMultiplier
+
+            return fCount * firstDeal + sCount * secondDeal + remainder * itemPrice
+        }
+
+        fun applySingleDeal(multiplier: Int, deal: Int, itemPrice: Int, itemCount: Int): Int {
+            val count = itemCount / multiplier
+            val remainder = itemCount - count * multiplier
+
+            return count * deal + remainder * itemPrice
         }
 
         // map occurrence of each items
@@ -101,18 +117,10 @@ object CheckoutSolution {
 
             when (item.key) {
                 "A" -> {
-                    val fiveCount = item.value / 5
-                    val after = item.value - fiveCount * 5
-                    val threeCount = after / 3
-                    val remainder = after % 3
-
-                    totalValue += fiveCount * 200 + threeCount * 130 + remainder * pricePerItem
+                    totalValue += applyDoubleDeal(5, 200, 3, 130, pricePerItem, item.value)
                 }
                 "B" -> {
-                    val twoCount = item.value / 2
-                    val remainder = item.value - twoCount * 2
-
-                    totalValue += twoCount * 45 + remainder * pricePerItem
+                    totalValue += applySingleDeal(2, 45, pricePerItem, item.value)
                 }
                 "F" -> {
                     totalValue += if (item.value >= 3) {
