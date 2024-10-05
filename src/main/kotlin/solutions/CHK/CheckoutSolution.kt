@@ -59,5 +59,3 @@ object CheckoutSolution {
         return totalValue
     }
 }
-
-
