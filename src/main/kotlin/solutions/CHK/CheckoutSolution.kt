@@ -105,11 +105,23 @@ object CheckoutSolution {
             }
         }
 
-//        fun applyGroupDeal(items: String, deal: Int): Int {
-//            val totalItemCount = 0
-//
-//
-//        }
+        fun applyGroupDeal(items: String, deal: Int): Int {
+            val totalItemCount = items.map { itemMap.getOrDefault(it.toString(), 0) }.sum()
+            val total = 0
+
+            while (totalItemCount >= 3) {
+                val counter = 0
+                while (counter < 3) {
+                    for (item in items) {
+                        if (itemMap.getOrDefault(item.toString(), 0) > 0 ) {
+                            itemMap[item.toString()] = itemMap[item.toString()] - 1
+                        }
+                    }
+                }
+            }
+
+            return total
+        }
 
         // map occurrence of each items
         skus.forEach { item ->
@@ -126,7 +138,7 @@ object CheckoutSolution {
         // R to Q deal (3)
         buyXGetOneFree("R", "Q", 3)
 
-//        totalValue += applyGroupDeal("STXYZ", 45)
+        totalValue += applyGroupDeal("STXYZ", 45)
 
         itemMap.forEach{ item ->
             val pricePerItem = prices[item.key]!!
