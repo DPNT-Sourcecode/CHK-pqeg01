@@ -24,10 +24,16 @@ object CheckoutSolution {
         }
 
         itemMap.forEach{ item ->
-            
+            val pricePerItem = prices[item.key]
+
+            if (item.key == "A") {
+                
+            }
+
         }
 
         return totalValue
     }
 }
+
 
