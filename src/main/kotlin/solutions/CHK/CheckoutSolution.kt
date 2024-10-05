@@ -27,7 +27,10 @@ object CheckoutSolution {
             val pricePerItem = prices[item.key]
 
             if (item.key == "A") {
-                
+                val fiveCount = item.value / 5
+                val after = item.value - fiveCount * 5
+                val threeCount = after / 3
+                val remainder = after % 3
             }
 
         }
@@ -35,5 +38,6 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
 
 
