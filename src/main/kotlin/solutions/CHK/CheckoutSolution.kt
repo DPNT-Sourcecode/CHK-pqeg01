@@ -99,7 +99,7 @@ object CheckoutSolution {
 
         fun buyXGetSameFree(count: Int, itemCount: Int, itemPrice: Int): Int {
             return if (itemCount >= (count + 1)) {
-                (itemCount / (count + 1)) * count + (itemCount % (count + 1))
+                (itemCount - (itemCount / (count + 1))) * itemPrice
             } else {
                 itemCount * itemPrice
             }
@@ -147,5 +147,6 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
 
 
