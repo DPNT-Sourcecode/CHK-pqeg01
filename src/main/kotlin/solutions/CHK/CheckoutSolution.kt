@@ -97,6 +97,10 @@ object CheckoutSolution {
             return count * deal + remainder * itemPrice
         }
 
+        fun buyXGetSameFree(): Int {
+
+        }
+
         // map occurrence of each items
         skus.forEach { item ->
             itemMap[item.toString()] = itemMap.getOrDefault(item.toString(), 0) + 1
@@ -139,3 +143,4 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
