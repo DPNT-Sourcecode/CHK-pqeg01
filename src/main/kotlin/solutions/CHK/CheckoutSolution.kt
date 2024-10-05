@@ -16,7 +16,8 @@ object CheckoutSolution {
             itemMap[item.toString()] = itemMap.getOrDefault(item.toString(), 0) + 1
         }
 
-        // apply E deal - maybe move this to the when block somehow
+        // do this first since this can affect other deals
+        // apply E deal - maybe move this to when block somehow
         val Ediscount = itemMap.getOrDefault("E", 0).div(2)
         itemMap["B"] = if (itemMap.getOrDefault("B", 0) - Ediscount < 0) {
             0
@@ -44,7 +45,7 @@ object CheckoutSolution {
                 }
                 "F" -> {
                     if (item.value >= 3) {
-                        totalValue += (item.value / 2) * pricePerItem + (item.value % 2) * pricePerItem
+                        totalValue += (item.value / 2) * pricePerItem + (item.value % 2 + 1) * pricePerItem
                     } else {
                         totalValue += item.value * pricePerItem
                     }
