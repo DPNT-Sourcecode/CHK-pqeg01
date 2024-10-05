@@ -45,7 +45,7 @@ object CheckoutSolution {
             "H" to 10,
             "I" to 35,
             "J" to 60,
-            "K" to 80,
+            "K" to 70,
             "L" to 90,
             "M" to 15,
             "N" to 40,
@@ -53,14 +53,14 @@ object CheckoutSolution {
             "P" to 50,
             "Q" to 30,
             "R" to 50,
-            "S" to 30,
+            "S" to 20,
             "T" to 20,
             "U" to 40,
             "V" to 50,
             "W" to 20,
-            "X" to 90,
-            "Y" to 10,
-            "Z" to 50,
+            "X" to 17,
+            "Y" to 20,
+            "Z" to 21,
             )
 
         // check for illegal values
@@ -106,18 +106,25 @@ object CheckoutSolution {
         }
 
         fun applyGroupDeal(items: String, deal: Int): Int {
-            val totalItemCount = items.map { itemMap.getOrDefault(it.toString(), 0) }.sum()
-            val total = 0
+            var totalItemCount = items.map { itemMap.getOrDefault(it.toString(), 0) }.sum()
+            var total = 0
 
             while (totalItemCount >= 3) {
-                val counter = 0
+                var counter = 0
+
                 while (counter < 3) {
+
                     for (item in items) {
-                        if (itemMap.getOrDefault(item.toString(), 0) > 0 ) {
-                            itemMap[item.toString()] = itemMap[item.toString()] - 1
+                        if (itemMap.getOrDefault(item.toString(), 0) > 0 && counter < 3) {
+                            itemMap[item.toString()] = itemMap[item.toString()]!! - 1
+                            counter++
                         }
                     }
+
                 }
+
+                total += deal
+                totalItemCount -= 3
             }
 
             return total
@@ -157,7 +164,7 @@ object CheckoutSolution {
                     totalValue += applyDoubleDeal(10, 80, 5, 45, pricePerItem, item.value)
                 }
                 "K" -> {
-                    totalValue += applySingleDeal(2, 150, pricePerItem, item.value)
+                    totalValue += applySingleDeal(2, 120, pricePerItem, item.value)
                 }
                 "P" -> {
                     totalValue += applySingleDeal(5, 200, pricePerItem, item.value)
@@ -181,3 +188,4 @@ object CheckoutSolution {
         return totalValue
     }
 }
+
